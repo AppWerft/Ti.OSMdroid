@@ -1,0 +1,18 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name TiosmdroidBindings
+%{
+
+#include <string.h>
+#include <v8.h>
+#include <KrollBindings.h>
+
+#include "ti.osmdroid.ViewProxy.h"
+#include "ti.osmdroid.TiosmdroidModule.h"
+
+
+%}
+struct titanium::bindings::BindEntry;
+%%
+ti.osmdroid.ViewProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::bindProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::dispose
+ti.osmdroid.TiosmdroidModule, ::ti::osmdroid::TiosmdroidModule::bindProxy, ::ti::osmdroid::TiosmdroidModule::dispose
+%%

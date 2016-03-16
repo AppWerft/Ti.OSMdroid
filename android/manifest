@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: armeabi armeabi-v7a x86
+description: tiosmdroid
+author: Rainer Schleevoigt
+license: Specify your license
+copyright: MIT
+
+# these should not be edited
+name: tiosmdroid
+moduleid: ti.osmdroid
+guid: 2e7fe9f9-eb51-477a-a111-954bbfc48d18
+platform: android
+minsdk: 5.1.0.GA
