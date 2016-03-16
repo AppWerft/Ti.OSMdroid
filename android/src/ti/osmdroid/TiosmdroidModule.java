@@ -40,7 +40,7 @@ public class TiosmdroidModule extends KrollModule {
     public static final int MAPQUESTOSM = 9;
 
 	// Standard Debugging variables
-	private static final String LCAT = "TiosmdroidModule";
+	private static final String LCAT = "TiOSM";
 	private static final boolean DBG = TiConfig.LOGD;
 
 	public TiosmdroidModule() {

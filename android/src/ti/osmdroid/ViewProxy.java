@@ -22,7 +22,7 @@ import android.app.Activity;
 @Kroll.proxy(creatableInModule=TiosmdroidModule.class)
 public class ViewProxy extends TiViewProxy {
 	// Standard Debugging variables
-	private static final String LCAT = "TiOsmdroidModule/ViewProxy";
+	private static final String LCAT = "TiOSM";
 	private static final boolean DBG = TiConfig.LOGD;
 
 	private MapView view;

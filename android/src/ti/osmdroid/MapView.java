@@ -39,39 +39,9 @@ public class MapView extends TiUIView implements Handler.Callback {
 
 	public MapView(TiViewProxy proxy) {
 		super(proxy);
-
 		this.handler = new Handler(Looper.getMainLooper(), this);
-		// LayoutArrangement arrangement = LayoutArrangement.DEFAULT;
-
-		// if (proxy.hasProperty(TiC.PROPERTY_LAYOUT)) {
-		// 	String layoutProperty = TiConvert.toString(proxy.getProperty(TiC.PROPERTY_LAYOUT));
-		// 	if (layoutProperty.equals(TiC.LAYOUT_HORIZONTAL)) {
-		// 		arrangement = LayoutArrangement.HORIZONTAL;
-		// 	} else if (layoutProperty.equals(TiC.LAYOUT_VERTICAL)) {
-		// 		arrangement = LayoutArrangement.VERTICAL;
-		// 	}
-		// }
-		// setNativeView(new TiCompositeLayout(proxy.getActivity(), arrangement));
 		osmMapView = new org.osmdroid.views.MapView(proxy.getActivity(), 50);
 		setNativeView(osmMapView);
-
-		// Log.d(LCAT, "TiOsmdroidMapView created");
-
-		// String message = TiConvert.toString(proxy.getProperty(TiC.PROPERTY_MESSAGE));
-		// Log.d(LCAT, "MapView property message=" + message);
-
-
-		// int mapType = TiConvert.toInt
-		// Object val = proxy.getProperty(TiC.TiC.PROPERTY_MAP_TYPE);
-		// if (val) {
-		// 	mapType = TiConvert.toInt(val);
-		// }
-
-		// Array region = null;
-		// val = proxy.getProperty(TiC.PROPERTY_REGION);
-		// if (val) {
-		// 	region = TiConvert.toArray(val);
-		// }
 	}
 
 	@Override
@@ -123,16 +93,7 @@ public class MapView extends TiUIView implements Handler.Callback {
 
 	@Override
 	public void propertyChanged(String key, Object oldValue, Object newValue, KrollProxy proxy) {
-		/* if (key.equals(TiC.PROPERTY_LOCATION)) {
-			if (newValue != null) {
-				if (newValue instanceof AnnotationProxy) {
-					AnnotationProxy ap = (AnnotationProxy) newValue;
-					doSetLocation(ap.getProperties());
-				} else if (newValue instanceof KrollDict) {
-					doSetLocation((KrollDict) newValue);
-				}
-			}
-		} else */ if (key.equals(TiC.PROPERTY_MAP_TYPE)) {
+		if (key.equals(TiC.PROPERTY_MAP_TYPE)) {
 			if (newValue == null) {
 				doSetMapType(ti.osmdroid.TiosmdroidModule.MAPNIK);
 			} else {
@@ -180,14 +141,7 @@ public class MapView extends TiUIView implements Handler.Callback {
 	public void doSetLocation(KrollDict d) {
 		org.osmdroid.views.MapView mapView = getView();
 		if (d.containsKeyAndNotNull(TiC.PROPERTY_LONGITUDE) && d.containsKeyAndNotNull(TiC.PROPERTY_LATITUDE)) {
-			// int latitudeE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LATITUDE));
-			// int longitudeE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LONGITUDE));
-
-			// Log.d(LCAT, "latitudeE6=" + latitudeE6 + ", longitudeE6=" + longitudeE6);
-
-			// GeoPoint gp = new GeoPoint(latitudeE6, longitudeE6);
-			GeoPoint gp = new GeoPoint(d.getDouble(TiC.PROPERTY_LATITUDE), d.getDouble(TiC.PROPERTY_LONGITUDE));
-
+				GeoPoint gp = new GeoPoint(d.getDouble(TiC.PROPERTY_LATITUDE), d.getDouble(TiC.PROPERTY_LONGITUDE));
 			if (animate) {
 				mapView.getController().animateTo(gp);
 			} else {
@@ -198,11 +152,6 @@ public class MapView extends TiUIView implements Handler.Callback {
 			int latitudeDeltaE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LATITUDE_DELTA));
 			int longitudeDeltaE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LONGITUDE_DELTA));
 			Log.d(LCAT, "latitudeDeltaE6=" + latitudeDeltaE6 + ", longitudeDeltaE6=" + longitudeDeltaE6);
-
-			// calling this method causes ANR!!
-			// see this post: Issue 123: Problem in zoomToSpan 
-			// http://code.google.com/p/osmdroid/issues/detail?id=123 
-			// mapView.getController().zoomToSpan(latitudeDeltaE6, longitudeDeltaE6);
 		} else {
 			Log.w(LCAT, "span must have longitudeDelta and latitudeDelta");
 		}
@@ -244,9 +193,6 @@ public class MapView extends TiUIView implements Handler.Callback {
 		handler.obtainMessage(MSG_CHANGE_ZOOM, delta, 0).sendToTarget();
 	}
 
-	private double scaleFromGoogle(int value) {
-		return (double)value / 1000000.0;
-	}
 
 	private int scaleToGoogle(double value) {
 		return (int)(value * 1000000);
