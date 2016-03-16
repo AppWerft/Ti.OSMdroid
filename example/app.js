@@ -8,32 +8,5 @@
 var win = Ti.UI.createWindow({
 	backgroundColor:'white'
 });
-var label = Ti.UI.createLabel();
-win.add(label);
+
 win.open();
-
-// TODO: write your module tests here
-var tiosmdroid = require('ti.osmdroid');
-Ti.API.info("module is => " + tiosmdroid);
-
-label.text = tiosmdroid.example();
-
-Ti.API.info("module exampleProp is => " + tiosmdroid.exampleProp);
-tiosmdroid.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = tiosmdroid.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-

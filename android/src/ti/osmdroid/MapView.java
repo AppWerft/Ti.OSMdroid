@@ -23,7 +23,6 @@ import org.osmdroid.views.overlay.Overlay;
 public class MapView extends TiUIView implements Handler.Callback {
 	private static final String LCAT = "TiOsmdroidModule/MapView";
 	private static final boolean DBG = TiConfig.LOGD;
-	
 
 	private static final int MSG_CHANGE_ZOOM = 306;
 
