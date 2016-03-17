@@ -19,25 +19,29 @@ import org.appcelerator.kroll.common.TiConfig;
 @Kroll.module(name="Tiosmdroid", id="ti.osmdroid")
 public class TiosmdroidModule extends KrollModule {
 	@Kroll.constant
-	public static final int OSMARENDER = 0;
+	public static final int BASE_OVERLAY_NL = 0;
 	@Kroll.constant
-    public static final int MAPNIK = 1; // this is default
+    public static final int CLOUDMADESMALLTILES = 1; // this is default
     @Kroll.constant
-    public static final int CYCLEMAP = 2;
+    public static final int CLOUDMADESTANDARDTILES = 2;
     @Kroll.constant
-    public static final int PUBLIC_TRANSPORT = 3;
+    public static final int CYCLEMAP = 3;
     @Kroll.constant
-    public static final int BASE = 4;
+    public static final int DEFAULT_TILE_SOURCE = 4;
 	@Kroll.constant
-    public static final int TOPO = 5;
+    public static final int FIETS_OVERLAY_NL = 5;
     @Kroll.constant
-    public static final int HILLS = 6;
+    public static final int MAPNIK = 6;
 	@Kroll.constant
-    public static final int CLOUDMADESTANDARDTILES = 7;
+    public static final int MAPQUESTAERIAL = 7;
     @Kroll.constant
-    public static final int CLOUDMADESMALLTILES = 8;
+    public static final int MAPQUESTAERIAL_US = 8;
     @Kroll.constant
     public static final int MAPQUESTOSM = 9;
+    @Kroll.constant
+    public static final int PUBLIC_TRANSPORT = 10;
+    @Kroll.constant
+    public static final int ROADS_OVERLAY_NL = 11;
 
 	// Standard Debugging variables
 	private static final String LCAT = "TiOSM";

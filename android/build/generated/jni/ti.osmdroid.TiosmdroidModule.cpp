@@ -105,25 +105,29 @@ Handle<FunctionTemplate> TiosmdroidModule::getProxyTemplate()
 	}
 
 
-		DEFINE_INT_CONSTANT(prototypeTemplate, "PUBLIC_TRANSPORT", 3);
+		DEFINE_INT_CONSTANT(prototypeTemplate, "CLOUDMADESTANDARDTILES", 2);
 
-		DEFINE_INT_CONSTANT(prototypeTemplate, "CLOUDMADESTANDARDTILES", 7);
+		DEFINE_INT_CONSTANT(prototypeTemplate, "MAPNIK", 6);
 
-		DEFINE_INT_CONSTANT(prototypeTemplate, "OSMARENDER", 0);
+		DEFINE_INT_CONSTANT(prototypeTemplate, "CYCLEMAP", 3);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "MAPQUESTAERIAL_US", 8);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "ROADS_OVERLAY_NL", 11);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "PUBLIC_TRANSPORT", 10);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "DEFAULT_TILE_SOURCE", 4);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "MAPQUESTAERIAL", 7);
+
+		DEFINE_INT_CONSTANT(prototypeTemplate, "BASE_OVERLAY_NL", 0);
 
 		DEFINE_INT_CONSTANT(prototypeTemplate, "MAPQUESTOSM", 9);
 
-		DEFINE_INT_CONSTANT(prototypeTemplate, "MAPNIK", 1);
+		DEFINE_INT_CONSTANT(prototypeTemplate, "CLOUDMADESMALLTILES", 1);
 
-		DEFINE_INT_CONSTANT(prototypeTemplate, "HILLS", 6);
-
-		DEFINE_INT_CONSTANT(prototypeTemplate, "CYCLEMAP", 2);
-
-		DEFINE_INT_CONSTANT(prototypeTemplate, "CLOUDMADESMALLTILES", 8);
-
-		DEFINE_INT_CONSTANT(prototypeTemplate, "TOPO", 5);
-
-		DEFINE_INT_CONSTANT(prototypeTemplate, "BASE", 4);
+		DEFINE_INT_CONSTANT(prototypeTemplate, "FIETS_OVERLAY_NL", 5);
 
 
 	// Dynamic properties -----------------------------------------------------
