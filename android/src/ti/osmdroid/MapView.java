@@ -54,14 +54,16 @@ public class MapView extends TiUIView implements Handler.Callback {
 			}
 		}
 		if (d.containsKeyAndNotNull(TiC.PROPERTY_ZOOM_ENABLED)) {
-			Boolean enableZoomCtl = TiConvert.toBoolean(d,TiC.PROPERTY_ZOOM_ENABLED);
+			Boolean enableZoomCtl = TiConvert.toBoolean(d,
+					TiC.PROPERTY_ZOOM_ENABLED);
 			org.osmdroid.views.MapView mapView = getView();
 			mapView.setBuiltInZoomControls(enableZoomCtl);
 			Log.d(LCAT, "zoomEnabled=" + enableZoomCtl);
 		}
 		if (d.containsKeyAndNotNull(TiC.PROPERTY_SCROLL_ENABLED)) {
 			// [TODO] always true?
-			Boolean enableScroll = TiConvert.toBoolean(d,TiC.PROPERTY_SCROLL_ENABLED);
+			Boolean enableScroll = TiConvert.toBoolean(d,
+					TiC.PROPERTY_SCROLL_ENABLED);
 			// mapView.setScrollable(enableScroll);
 			Log.d(LCAT, "scrollEnabled=" + enableScroll);
 		}
@@ -80,11 +82,13 @@ public class MapView extends TiUIView implements Handler.Callback {
 			doUserLocation(d.getBoolean(TiC.PROPERTY_USER_LOCATION));
 		}
 		if (d.containsKeyAndNotNull(TiC.PROPERTY_ANNOTATIONS)) {
-			// proxy.setProperty(TiC.PROPERTY_ANNOTATIONS, d.get(TiC.PROPERTY_ANNOTATIONS));
-			// Object [] annotations = (Object[]) d.get(TiC.PROPERTY_ANNOTATIONS);
+			// proxy.setProperty(TiC.PROPERTY_ANNOTATIONS,
+			// d.get(TiC.PROPERTY_ANNOTATIONS));
+			// Object [] annotations = (Object[])
+			// d.get(TiC.PROPERTY_ANNOTATIONS);
 			// for(int i = 0; i < annotations.length; i++) {
-			// 	AnnotationProxy ap = (AnnotationProxy) annotations[i];
-			// 	this.annotations.add(ap);
+			// AnnotationProxy ap = (AnnotationProxy) annotations[i];
+			// this.annotations.add(ap);
 			// }
 			// doSetAnnotations(this.annotations);
 		}
@@ -92,7 +96,8 @@ public class MapView extends TiUIView implements Handler.Callback {
 	}
 
 	@Override
-	public void propertyChanged(String key, Object oldValue, Object newValue, KrollProxy proxy) {
+	public void propertyChanged(String key, Object oldValue, Object newValue,
+			KrollProxy proxy) {
 		if (key.equals(TiC.PROPERTY_MAP_TYPE)) {
 			if (newValue == null) {
 				doSetMapType(ti.osmdroid.TiosmdroidModule.MAPNIK);
@@ -105,30 +110,37 @@ public class MapView extends TiUIView implements Handler.Callback {
 	}
 
 	public boolean handleMessage(Message msg) {
-		switch(msg.what) {
-			case MSG_CHANGE_ZOOM :
-				MapController mc = osmMapView.getController();
-				if (mc != null) {
-					mc.setZoom(osmMapView.getZoomLevel() + msg.arg1);
-				}
-				return true;
+		switch (msg.what) {
+		case MSG_CHANGE_ZOOM:
+
+			MapController mc = (MapController) osmMapView.getController();
+			if (mc != null) {
+				mc.setZoom(osmMapView.getZoomLevel() + msg.arg1);
+			}
+
+			return true;
 		}
 		return false;
 	}
 
-	private ITileSource tileSrc[] = {
-		//	TileSourceFactory.OSMARENDER,
-	        TileSourceFactory.MAPNIK,
-	        TileSourceFactory.CYCLEMAP,
-	        TileSourceFactory.PUBLIC_TRANSPORT,
-	        TileSourceFactory.BASE,
-	        TileSourceFactory.TOPO,
-	        TileSourceFactory.HILLS,
-	        TileSourceFactory.CLOUDMADESTANDARDTILES,
-	        TileSourceFactory.CLOUDMADESMALLTILES,
-	        TileSourceFactory.MAPQUESTOSM
-	};
-	
+	private ITileSource tileSrc[] = { TileSourceFactory.BASE_OVERLAY_NL,
+			TileSourceFactory.CLOUDMADESMALLTILES,
+			TileSourceFactory.CLOUDMADESTANDARDTILES,
+			TileSourceFactory.CYCLEMAP, TileSourceFactory.DEFAULT_TILE_SOURCE,
+			TileSourceFactory.FIETS_OVERLAY_NL, TileSourceFactory.MAPNIK,
+			TileSourceFactory.MAPQUESTAERIAL,
+			TileSourceFactory.MAPQUESTAERIAL_US, TileSourceFactory.MAPQUESTOSM,
+			TileSourceFactory.PUBLIC_TRANSPORT, //3
+			TileSourceFactory.ROADS_OVERLAY_NL };
+
+	/*
+	 * // TileSourceFactory.OSMARENDER, TileSourceFactory.MAPNIK,
+	 * TileSourceFactory.CYCLEMAP, TileSourceFactory.PUBLIC_TRANSPORT, //
+	 * TileSourceFactory.BASE, // TileSourceFactory.TOPO, //
+	 * TileSourceFactory.HILLS, TileSourceFactory.CLOUDMADESTANDARDTILES,
+	 * TileSourceFactory.CLOUDMADESMALLTILES, TileSourceFactory.MAPQUESTOSM };
+	 */
+
 	private org.osmdroid.views.MapView getView() {
 		return osmMapView;
 	}
@@ -140,18 +152,24 @@ public class MapView extends TiUIView implements Handler.Callback {
 
 	public void doSetLocation(KrollDict d) {
 		org.osmdroid.views.MapView mapView = getView();
-		if (d.containsKeyAndNotNull(TiC.PROPERTY_LONGITUDE) && d.containsKeyAndNotNull(TiC.PROPERTY_LATITUDE)) {
-				GeoPoint gp = new GeoPoint(d.getDouble(TiC.PROPERTY_LATITUDE), d.getDouble(TiC.PROPERTY_LONGITUDE));
+		if (d.containsKeyAndNotNull(TiC.PROPERTY_LONGITUDE)
+				&& d.containsKeyAndNotNull(TiC.PROPERTY_LATITUDE)) {
+			GeoPoint gp = new GeoPoint(d.getDouble(TiC.PROPERTY_LATITUDE),
+					d.getDouble(TiC.PROPERTY_LONGITUDE));
 			if (animate) {
 				mapView.getController().animateTo(gp);
 			} else {
 				mapView.getController().setCenter(gp);
 			}
 		}
-		if (regionFit && d.containsKeyAndNotNull(TiC.PROPERTY_LONGITUDE_DELTA) && d.containsKeyAndNotNull(TiC.PROPERTY_LATITUDE_DELTA)) {
-			int latitudeDeltaE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LATITUDE_DELTA));
-			int longitudeDeltaE6 = scaleToGoogle(d.getDouble(TiC.PROPERTY_LONGITUDE_DELTA));
-			Log.d(LCAT, "latitudeDeltaE6=" + latitudeDeltaE6 + ", longitudeDeltaE6=" + longitudeDeltaE6);
+		if (regionFit && d.containsKeyAndNotNull(TiC.PROPERTY_LONGITUDE_DELTA)
+				&& d.containsKeyAndNotNull(TiC.PROPERTY_LATITUDE_DELTA)) {
+			int latitudeDeltaE6 = scaleToGoogle(d
+					.getDouble(TiC.PROPERTY_LATITUDE_DELTA));
+			int longitudeDeltaE6 = scaleToGoogle(d
+					.getDouble(TiC.PROPERTY_LONGITUDE_DELTA));
+			Log.d(LCAT, "latitudeDeltaE6=" + latitudeDeltaE6
+					+ ", longitudeDeltaE6=" + longitudeDeltaE6);
 		} else {
 			Log.w(LCAT, "span must have longitudeDelta and latitudeDelta");
 		}
@@ -162,12 +180,13 @@ public class MapView extends TiUIView implements Handler.Callback {
 		if (mapView != null) {
 			if (userLocation) {
 				if (myLocation == null) {
-					//myLocation = new MyLocationOverlay(proxy.getContext(), mapView);
+					// myLocation = new MyLocationOverlay(proxy.getContext(),
+					// mapView);
 					return;
 				}
 
 				List<Overlay> overlays = mapView.getOverlays();
-				synchronized(overlays) {
+				synchronized (overlays) {
 					if (!overlays.contains(myLocation)) {
 						overlays.add(myLocation);
 					}
@@ -178,7 +197,7 @@ public class MapView extends TiUIView implements Handler.Callback {
 			} else {
 				if (myLocation != null) {
 					List<Overlay> overlays = mapView.getOverlays();
-					synchronized(overlays) {
+					synchronized (overlays) {
 						if (overlays.contains(myLocation)) {
 							overlays.remove(myLocation);
 						}
@@ -188,13 +207,12 @@ public class MapView extends TiUIView implements Handler.Callback {
 			}
 		}
 	}
-	
+
 	public void changeZoomLevel(int delta) {
 		handler.obtainMessage(MSG_CHANGE_ZOOM, delta, 0).sendToTarget();
 	}
 
-
 	private int scaleToGoogle(double value) {
-		return (int)(value * 1000000);
+		return (int) (value * 1000000);
 	}
 }
