@@ -18,18 +18,27 @@ import org.appcelerator.kroll.common.TiConfig;
 import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
+
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.util.constants.MapViewConstants;
+
 import java.util.ArrayList;
-
-
-
+import java.util.List;
 
 // This proxy can be created by calling Tiosmdroid.createView({})
 @Kroll.proxy(creatableInModule = TiosmdroidModule.class)
 public class ViewProxy extends TiViewProxy {
+
 	// Standard Debugging variables
 	private static final String LCAT = "TiOSM";
 	private static final boolean DBG = TiConfig.LOGD;
-
+	
+	private ArrayList<AnnotationProxy> annotations;
 	private MapView view;
 	private KrollDict location;
 	private int zoomLevel = -1;
@@ -76,10 +85,10 @@ public class ViewProxy extends TiViewProxy {
 		for (int i = 0; i < annotations.length; i++) {
 			AnnotationProxy ap = annotationProxyForObject(annotations[i]);
 			if (ap != null && isAnnotationValid(ap)) {
-		//		this.annotations.add(ap);
+				this.annotations.add(ap);
 			}
 		}
-		//doSetAnnotations(this.annotations);
+		doSetAnnotations(this.annotations);
 	}
 
 	@Kroll.method
@@ -124,29 +133,38 @@ public class ViewProxy extends TiViewProxy {
 	}
 
 	public void doSetAnnotations(ArrayList<AnnotationProxy> annotations) {
-		/*
-		 * if (annotations != null) {
-		 * 
-		 * this.annotations = annotations; List<Overlay> overlays =
-		 * view.getOverlays();
-		 * 
-		 * synchronized(overlays) { if (overlays.contains(overlay)) {
-		 * overlays.remove(overlay); overlay = null; }
-		 * 
-		 * if (annotations.size() > 0) { overlay = new
-		 * TitaniumOverlay(makeMarker(Color.BLUE), this);
-		 * overlay.setAnnotations(annotations); overlays.add(overlay);
-		 * 
-		 * int numSelectedAnnotations = selectedAnnotations.size(); for(int i =
-		 * 0; i < numSelectedAnnotations; i++) { SelectedAnnotation annotation =
-		 * selectedAnnotations.get(i); Log.d(TAG,
-		 * "Executing internal call to selectAnnotation:" + annotation.title,
-		 * Log.DEBUG_MODE); selectAnnotation(true, annotation.title,
-		 * annotation.selectedAnnotation, annotation.animate,
-		 * annotation.center); import java.util.ArrayList; } }
-		 * 
-		 * view.invalidate(); } }
-		 */
+		if (annotations != null) {
+
+			this.annotations = annotations;
+			List<Overlay> overlays = view.getOverlays();
+
+			synchronized (overlays) {
+				if (overlays.contains(overlay)) {
+					overlays.remove(overlay);
+					overlay = null;
+				}
+
+				if (annotations.size() > 0) {
+					overlay = new TitaniumOverlay(makeMarker(Color.BLUE), this);
+					overlay.setAnnotations(annotations);
+					overlays.add(overlay);
+
+					int numSelectedAnnotations = selectedAnnotations.size();
+					for (int i = 0; i < numSelectedAnnotations; i++) {
+						SelectedAnnotation annotation = selectedAnnotations
+								.get(i);
+						Log.d(TAG,
+								"Executing internal call to selectAnnotation:"
+										+ annotation.title, Log.DEBUG_MODE);
+						selectAnnotation(true, annotation.title,
+								annotation.selectedAnnotation,
+								annotation.animate, annotation.center);
+					}
+				}
+
+				view.invalidate();
+			}
+		}
 	}
 
 }

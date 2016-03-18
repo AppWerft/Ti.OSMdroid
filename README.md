@@ -4,8 +4,7 @@ OSMdroid
 ![](https://raw.githubusercontent.com/AppWerft/Ti.OSMdroid/master/assets/osmdroid.png)
 ~~~
 var window = Ti.UI.createWindow({
-backgroundColor : 'white',
-title : 'OSMdroid-Test'
+    title : 'OSMdroid-Test'
 });
 
 window.open();
