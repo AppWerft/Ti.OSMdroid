@@ -9,6 +9,7 @@
 package ti.osmdroid;
 
 import org.appcelerator.kroll.KrollDict;
+import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
@@ -17,9 +18,13 @@ import org.appcelerator.kroll.common.TiConfig;
 import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
+import java.util.ArrayList;
+
+
+
 
 // This proxy can be created by calling Tiosmdroid.createView({})
-@Kroll.proxy(creatableInModule=TiosmdroidModule.class)
+@Kroll.proxy(creatableInModule = TiosmdroidModule.class)
 public class ViewProxy extends TiViewProxy {
 	// Standard Debugging variables
 	private static final String LCAT = "TiOSM";
@@ -40,9 +45,9 @@ public class ViewProxy extends TiViewProxy {
 		view.getLayoutParams().autoFillsHeight = true;
 		view.getLayoutParams().autoFillsWidth = true;
 
-	 	if (zoomLevel > 0) {
-	 		view.changeZoomLevel(zoomLevel);
-	 	}
+		if (zoomLevel > 0) {
+			view.changeZoomLevel(zoomLevel);
+		}
 
 		return view;
 	}
@@ -58,8 +63,8 @@ public class ViewProxy extends TiViewProxy {
 	}
 
 	@Kroll.method
-	public void setLocation(KrollDict location)	{
-		if(view == null) {
+	public void setLocation(KrollDict location) {
+		if (view == null) {
 			this.location = location;
 		} else {
 			view.doSetLocation(location);
@@ -67,7 +72,81 @@ public class ViewProxy extends TiViewProxy {
 	}
 
 	@Kroll.method
+	public void addAnnotations(Object[] annotations) {
+		for (int i = 0; i < annotations.length; i++) {
+			AnnotationProxy ap = annotationProxyForObject(annotations[i]);
+			if (ap != null && isAnnotationValid(ap)) {
+		//		this.annotations.add(ap);
+			}
+		}
+		//doSetAnnotations(this.annotations);
+	}
+
+	@Kroll.method
 	public void setMapType(int mapType) {
 		this.setProperty(TiC.PROPERTY_MAP_TYPE, mapType, true);
 	}
+
+	private AnnotationProxy annotationProxyForObject(Object ann) {
+
+		if (ann == null) {
+			Log.e(LCAT,
+					"Unable to create annotation proxy for null object passed in.");
+			return null;
+		}
+		AnnotationProxy annProxy = null;
+		/*
+		 * if (ann instanceof AnnotationProxy) { annProxy = (AnnotationProxy)
+		 * ann; annProxy.setViewProxy((ViewProxy) proxy); } else { KrollDict
+		 * annotationDict = null; if (ann instanceof KrollDict) { annotationDict
+		 * = (KrollDict) ann; } else if (ann instanceof HashMap) {
+		 * annotationDict = new KrollDict((HashMap) ann); }
+		 * 
+		 * if (annotationDict != null) { annProxy = new AnnotationProxy();
+		 * annProxy.setCreationUrl(proxy.getCreationUrl() .getNormalizedUrl());
+		 * annProxy.handleCreationDict(annotationDict);
+		 * annProxy.setActivity(proxy.getActivity());
+		 * annProxy.setViewProxy((ViewProxy) proxy); } }
+		 * 
+		 * if (annProxy == null) { Log.e(TAG,
+		 * "Unable to create annotation proxy for object, likely an error in the type of the object passed in..."
+		 * ); }
+		 */
+		return annProxy;
+	}
+
+	protected boolean isAnnotationValid(AnnotationProxy annotation) {
+		if (annotation.hasProperty(TiC.PROPERTY_LATITUDE)
+				&& annotation.hasProperty(TiC.PROPERTY_LONGITUDE)) {
+			return true;
+		}
+		return false;
+	}
+
+	public void doSetAnnotations(ArrayList<AnnotationProxy> annotations) {
+		/*
+		 * if (annotations != null) {
+		 * 
+		 * this.annotations = annotations; List<Overlay> overlays =
+		 * view.getOverlays();
+		 * 
+		 * synchronized(overlays) { if (overlays.contains(overlay)) {
+		 * overlays.remove(overlay); overlay = null; }
+		 * 
+		 * if (annotations.size() > 0) { overlay = new
+		 * TitaniumOverlay(makeMarker(Color.BLUE), this);
+		 * overlay.setAnnotations(annotations); overlays.add(overlay);
+		 * 
+		 * int numSelectedAnnotations = selectedAnnotations.size(); for(int i =
+		 * 0; i < numSelectedAnnotations; i++) { SelectedAnnotation annotation =
+		 * selectedAnnotations.get(i); Log.d(TAG,
+		 * "Executing internal call to selectAnnotation:" + annotation.title,
+		 * Log.DEBUG_MODE); selectAnnotation(true, annotation.title,
+		 * annotation.selectedAnnotation, annotation.animate,
+		 * annotation.center); import java.util.ArrayList; } }
+		 * 
+		 * view.invalidate(); } }
+		 */
+	}
+
 }

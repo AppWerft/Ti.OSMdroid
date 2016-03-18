@@ -2,23 +2,24 @@ package ti.osmdroid;
 
 import java.util.List;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollProxy;
-import org.appcelerator.titanium.TiC;
-import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.appcelerator.titanium.TiC;
+import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIView;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.views.MapController;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.overlay.MyLocationOverlay;
 import org.osmdroid.views.overlay.Overlay;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 public class MapView extends TiUIView implements Handler.Callback {
 	private static final String LCAT = "TiOsmdroidModule/MapView";
@@ -42,6 +43,10 @@ public class MapView extends TiUIView implements Handler.Callback {
 		this.handler = new Handler(Looper.getMainLooper(), this);
 		osmMapView = new org.osmdroid.views.MapView(proxy.getActivity(), 50);
 		setNativeView(osmMapView);
+
+		osmMapView.setBuiltInZoomControls(true);
+		osmMapView.setMultiTouchControls(true);
+
 	}
 
 	@Override
@@ -109,15 +114,15 @@ public class MapView extends TiUIView implements Handler.Callback {
 		}
 	}
 
+	// http://osmdroid.azurewebsites.net/osmdroid-android-4.3-javadoc/org/osmdroid/tileprovider/util/SimpleInvalidationHandler.html
 	public boolean handleMessage(Message msg) {
+		Log.d(LCAT, "handleMessage " + msg.what + "   " + msg.arg1);
 		switch (msg.what) {
 		case MSG_CHANGE_ZOOM:
-
 			MapController mc = (MapController) osmMapView.getController();
 			if (mc != null) {
 				mc.setZoom(osmMapView.getZoomLevel() + msg.arg1);
 			}
-
 			return true;
 		}
 		return false;
@@ -130,7 +135,7 @@ public class MapView extends TiUIView implements Handler.Callback {
 			TileSourceFactory.FIETS_OVERLAY_NL, TileSourceFactory.MAPNIK,
 			TileSourceFactory.MAPQUESTAERIAL,
 			TileSourceFactory.MAPQUESTAERIAL_US, TileSourceFactory.MAPQUESTOSM,
-			TileSourceFactory.PUBLIC_TRANSPORT, //3
+			TileSourceFactory.PUBLIC_TRANSPORT,
 			TileSourceFactory.ROADS_OVERLAY_NL };
 
 	/*
@@ -191,7 +196,6 @@ public class MapView extends TiUIView implements Handler.Callback {
 						overlays.add(myLocation);
 					}
 				}
-
 				myLocation.enableMyLocation();
 
 			} else {

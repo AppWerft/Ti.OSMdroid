@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0.0
+version: 1.0.1
 apiversion: 2
 architectures: armeabi armeabi-v7a x86
 description: tiosmdroid
@@ -15,4 +15,4 @@ name: tiosmdroid
 moduleid: ti.osmdroid
 guid: 2e7fe9f9-eb51-477a-a111-954bbfc48d18
 platform: android
-minsdk: 5.1.0.GA
+minsdk: 5.2.0.GA

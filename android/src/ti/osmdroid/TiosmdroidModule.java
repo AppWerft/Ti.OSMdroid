@@ -10,10 +10,9 @@ package ti.osmdroid;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-
-import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.appcelerator.titanium.TiApplication;
 
 
 @Kroll.module(name="Tiosmdroid", id="ti.osmdroid")
@@ -54,9 +53,6 @@ public class TiosmdroidModule extends KrollModule {
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app) {
 		Log.d(LCAT, "inside onAppCreate");
-		// put module init code that needs to run when the application is created
 	}
-
-
 }
 
