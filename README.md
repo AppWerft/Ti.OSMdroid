@@ -1,7 +1,7 @@
 OSMdroid
 ========
 
-
+![](https://raw.githubusercontent.com/AppWerft/Ti.OSMdroid/master/assets/osmdroid.png)
 ~~~
 var window = Ti.UI.createWindow({
 backgroundColor : 'white',
