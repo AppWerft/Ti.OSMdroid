@@ -24,10 +24,18 @@ function moduleBootstrap(moduleBinding) {
 		invocationAPIs.push({ namespace: namespace, api: api });
 	}
 
-		addInvocationAPI(module, "Tiosmdroid", "Tiosmdroid", "createView");
+		addInvocationAPI(module, "Tiosmdroid", "Tiosmdroid", "createAnnotation");
+	addInvocationAPI(module, "Tiosmdroid", "Tiosmdroid", "createView");
 
 			if (!("__propertiesDefined__" in module)) {		
 		Object.defineProperties(module, {
+			"Annotation": {
+				get: function() {
+					var Annotation = lazyGet(this, "ti.osmdroid.AnnotationProxy", "Annotation", "Annotation");
+					return Annotation;
+				},
+				configurable: true
+			},
 			"View": {
 				get: function() {
 					var View = lazyGet(this, "ti.osmdroid.ViewProxy", "View", "View");
@@ -37,6 +45,9 @@ function moduleBootstrap(moduleBinding) {
 			},
 		
 		});
+		module.constructor.prototype.createAnnotation = function() {
+			return new module.Annotation(arguments);
+		}
 		module.constructor.prototype.createView = function() {
 			return new module.View(arguments);
 		}

@@ -20,6 +20,7 @@
 
 
 
+#include "ti.osmdroid.AnnotationProxy.h"
 #include "ti.osmdroid.ViewProxy.h"
 
 #include "org.appcelerator.kroll.KrollModule.h"

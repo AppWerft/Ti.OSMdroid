@@ -1,5 +1,5 @@
-/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T//fuerst/tiosmdroid-generated/obj/local/x86/objs/ti.osmdroid/ti.osmdroid.TiosmdroidModule.o: \
- jni/ti.osmdroid.TiosmdroidModule.cpp jni/ti.osmdroid.TiosmdroidModule.h \
+/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T//fuerst/tiosmdroid-generated/obj/local/x86/objs/ti.osmdroid/ti.osmdroid.AnnotationProxy.o: \
+ jni/ti.osmdroid.AnnotationProxy.cpp jni/ti.osmdroid.AnnotationProxy.h \
  /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/jni.h \
  /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
  /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
@@ -59,11 +59,10 @@
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/ProxyFactory.h \
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/TypeConverter.h \
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/V8Util.h \
- jni/ti.osmdroid.AnnotationProxy.h jni/ti.osmdroid.ViewProxy.h \
- /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/org.appcelerator.kroll.KrollModule.h \
+ /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/org.appcelerator.kroll.KrollProxy.h \
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/Proxy.h
 
-jni/ti.osmdroid.TiosmdroidModule.h:
+jni/ti.osmdroid.AnnotationProxy.h:
 
 /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/jni.h:
 
@@ -183,10 +182,6 @@ jni/ti.osmdroid.TiosmdroidModule.h:
 
 /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/V8Util.h:
 
-jni/ti.osmdroid.AnnotationProxy.h:
-
-jni/ti.osmdroid.ViewProxy.h:
-
-/Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/org.appcelerator.kroll.KrollModule.h:
+/Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/org.appcelerator.kroll.KrollProxy.h:
 
 /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/Proxy.h:

@@ -86,6 +86,7 @@ Handle<FunctionTemplate> ViewProxy::getProxyTemplate()
 	titanium::ProxyFactory::registerProxyPair(javaClass, *proxyTemplate);
 
 	// Method bindings --------------------------------------------------------
+	DEFINE_PROTOTYPE_METHOD(proxyTemplate, "addAnnotations", ViewProxy::addAnnotations);
 	DEFINE_PROTOTYPE_METHOD(proxyTemplate, "zoom", ViewProxy::zoom);
 	DEFINE_PROTOTYPE_METHOD(proxyTemplate, "setMapType", ViewProxy::setMapType);
 	DEFINE_PROTOTYPE_METHOD(proxyTemplate, "setLocation", ViewProxy::setLocation);
@@ -107,6 +108,71 @@ Handle<FunctionTemplate> ViewProxy::getProxyTemplate()
 }
 
 // Methods --------------------------------------------------------------------
+Handle<Value> ViewProxy::addAnnotations(const Arguments& args)
+{
+	LOGD(TAG, "addAnnotations()");
+	HandleScope scope;
+
+	JNIEnv *env = titanium::JNIScope::getEnv();
+	if (!env) {
+		return titanium::JSException::GetJNIEnvironmentError();
+	}
+	static jmethodID methodID = NULL;
+	if (!methodID) {
+		methodID = env->GetMethodID(ViewProxy::javaClass, "addAnnotations", "([Ljava/lang/Object;)V");
+		if (!methodID) {
+			const char *error = "Couldn't find proxy method 'addAnnotations' with signature '([Ljava/lang/Object;)V'";
+			LOGE(TAG, error);
+				return titanium::JSException::Error(error);
+		}
+	}
+
+	titanium::Proxy* proxy = titanium::Proxy::unwrap(args.Holder());
+
+
+	jvalue jArguments[1];
+
+
+
+
+	uint32_t length = args.Length() - 0;
+	if (length < 0) {
+		length = 0;
+	}
+
+	jobjectArray varArgs = env->NewObjectArray(length, titanium::JNIUtil::objectClass, NULL);
+	for (uint32_t i = 0; i < length; ++i) {
+		bool isNew;
+		jobject arg = titanium::TypeConverter::jsValueToJavaObject(env, args[i+0], &isNew);
+		env->SetObjectArrayElement(varArgs, i, arg);
+		if (isNew) {
+			env->DeleteLocalRef(arg);
+		}
+	}
+
+	jArguments[0].l = varArgs;
+
+	jobject javaProxy = proxy->getJavaObject();
+	env->CallVoidMethodA(javaProxy, methodID, jArguments);
+
+	if (!JavaObject::useGlobalRefs) {
+		env->DeleteLocalRef(javaProxy);
+	}
+
+
+			env->DeleteLocalRef(jArguments[0].l);
+
+	if (env->ExceptionCheck()) {
+		titanium::JSException::fromJavaException();
+		env->ExceptionClear();
+	}
+
+
+
+
+	return v8::Undefined();
+
+}
 Handle<Value> ViewProxy::zoom(const Arguments& args)
 {
 	LOGD(TAG, "zoom()");

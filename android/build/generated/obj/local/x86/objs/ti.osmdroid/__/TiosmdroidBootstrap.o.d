@@ -173,7 +173,7 @@
  /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/../include/assert.h \
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/EventEmitter.h \
  /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/NativeObject.h \
- jni/ti.osmdroid.TiosmdroidModule.h
+ jni/ti.osmdroid.TiosmdroidModule.h jni/ti.osmdroid.AnnotationProxy.h
 
 /Users/fuerst/Library/android-ndk-macosx/platforms/android-9/arch-x86/usr/include/jni.h:
 
@@ -524,3 +524,5 @@ jni/ti.osmdroid.ViewProxy.h:
 /Library/Application\ Support/Titanium/mobilesdk/osx/5.2.0.GA/android/native/include/NativeObject.h:
 
 jni/ti.osmdroid.TiosmdroidModule.h:
+
+jni/ti.osmdroid.AnnotationProxy.h:

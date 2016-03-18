@@ -8,6 +8,7 @@
 
 #include "ti.osmdroid.ViewProxy.h"
 #include "ti.osmdroid.TiosmdroidModule.h"
+#include "ti.osmdroid.AnnotationProxy.h"
 
 
 %}
@@ -15,4 +16,5 @@ struct titanium::bindings::BindEntry;
 %%
 ti.osmdroid.ViewProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::bindProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::dispose
 ti.osmdroid.TiosmdroidModule, ::ti::osmdroid::TiosmdroidModule::bindProxy, ::ti::osmdroid::TiosmdroidModule::dispose
+ti.osmdroid.AnnotationProxy, ::ti::osmdroid::tiosmdroid::AnnotationProxy::bindProxy, ::ti::osmdroid::tiosmdroid::AnnotationProxy::dispose
 %%

@@ -16,10 +16,10 @@
 			namespace tiosmdroid {
 
 
-class ViewProxy : public titanium::Proxy
+class AnnotationProxy : public titanium::Proxy
 {
 public:
-	explicit ViewProxy(jobject javaObject);
+	explicit AnnotationProxy(jobject javaObject);
 
 	static void bindProxy(v8::Handle<v8::Object> exports);
 	static v8::Handle<v8::FunctionTemplate> getProxyTemplate();
@@ -30,10 +30,6 @@ public:
 
 private:
 	// Methods -----------------------------------------------------------
-	static v8::Handle<v8::Value> addAnnotations(const v8::Arguments&);
-	static v8::Handle<v8::Value> zoom(const v8::Arguments&);
-	static v8::Handle<v8::Value> setMapType(const v8::Arguments&);
-	static v8::Handle<v8::Value> setLocation(const v8::Arguments&);
 
 	// Dynamic property accessors ----------------------------------------
 

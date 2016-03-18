@@ -11,9 +11,10 @@
 
 #include "ti.osmdroid.ViewProxy.h"
 #include "ti.osmdroid.TiosmdroidModule.h"
+#include "ti.osmdroid.AnnotationProxy.h"
 
 
-#line 14 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
+#line 15 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
 struct titanium::bindings::BindEntry;
 /* maximum key range = 8, duplicates = 0 */
 
@@ -37,7 +38,7 @@ TiosmdroidBindings::lookupGeneratedInit (register const char *str, register unsi
 {
   enum
     {
-      TOTAL_KEYWORDS = 2,
+      TOTAL_KEYWORDS = 3,
       MIN_WORD_LENGTH = 21,
       MAX_WORD_LENGTH = 28,
       MIN_HASH_VALUE = 21,
@@ -49,10 +50,12 @@ TiosmdroidBindings::lookupGeneratedInit (register const char *str, register unsi
       {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
       {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""},
       {""}, {""}, {""},
-#line 16 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
-      {"ti.osmdroid.ViewProxy", ::ti::osmdroid::tiosmdroid::ViewProxy::bindProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::dispose},
-      {""}, {""}, {""}, {""}, {""}, {""},
 #line 17 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
+      {"ti.osmdroid.ViewProxy", ::ti::osmdroid::tiosmdroid::ViewProxy::bindProxy, ::ti::osmdroid::tiosmdroid::ViewProxy::dispose},
+      {""}, {""}, {""}, {""}, {""},
+#line 19 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
+      {"ti.osmdroid.AnnotationProxy", ::ti::osmdroid::tiosmdroid::AnnotationProxy::bindProxy, ::ti::osmdroid::tiosmdroid::AnnotationProxy::dispose},
+#line 18 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
       {"ti.osmdroid.TiosmdroidModule", ::ti::osmdroid::TiosmdroidModule::bindProxy, ::ti::osmdroid::TiosmdroidModule::dispose}
     };
 
@@ -70,5 +73,5 @@ TiosmdroidBindings::lookupGeneratedInit (register const char *str, register unsi
     }
   return 0;
 }
-#line 18 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
+#line 20 "/private/var/folders/25/yvdn9h053sv3htdkzq8558k40000gn/T/fuerst/tiosmdroid-generated/KrollGeneratedBindings.gperf"
 
