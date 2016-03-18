@@ -41,6 +41,7 @@ public class MapView extends TiUIView implements Handler.Callback {
 	public MapView(TiViewProxy proxy) {
 		super(proxy);
 		this.handler = new Handler(Looper.getMainLooper(), this);
+		
 		osmMapView = new org.osmdroid.views.MapView(proxy.getActivity(), 50);
 		setNativeView(osmMapView);
 

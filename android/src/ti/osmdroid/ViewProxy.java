@@ -19,13 +19,7 @@ import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
 
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.ScaleBarOverlay;
-import org.osmdroid.views.util.constants.MapViewConstants;
+import org.osmdroid.views.overlay.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,10 +128,10 @@ public class ViewProxy extends TiViewProxy {
 
 	public void doSetAnnotations(ArrayList<AnnotationProxy> annotations) {
 		if (annotations != null) {
-
+			
 			this.annotations = annotations;
+			/*
 			List<Overlay> overlays = view.getOverlays();
-
 			synchronized (overlays) {
 				if (overlays.contains(overlay)) {
 					overlays.remove(overlay);
@@ -163,7 +157,7 @@ public class ViewProxy extends TiViewProxy {
 				}
 
 				view.invalidate();
-			}
+			}*/
 		}
 	}
 
