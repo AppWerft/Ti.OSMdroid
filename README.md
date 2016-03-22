@@ -3,51 +3,89 @@ OSMdroid
 
 ![](https://raw.githubusercontent.com/AppWerft/Ti.OSMdroid/master/assets/osmdroid.png)
 ~~~
-var window = Ti.UI.createWindow({
-    title : 'OSMdroid-Test'
+const MAPTYPES = [{
+    name : 'CycleMap',
+    index : 3
+}, {
+name : 'MAPNIK',
+index : 6
+}, {
+name : 'MAPQUEST-AERIAL',
+index : 7
+}, {
+name : 'MAPQUEST-OSM',
+index : 9
+}, {
+name : 'PUBLIC_TRANSPORT',
+index : 10
+}];
+
+var TiPermissions = require('ti.permissions'),
+osmDroid = require('ti.osmdroid');
+
+var $ = Ti.UI.createWindow({
+    title : 'OSMdroid-Test',
+    backgroundColor : 'gray'
 });
+$.addEventListener('open', function(_event) {
+    var activity = _event.source.getActivity();
+    if (activity) {
+        activity.onCreateOptionsMenu = function(_menuevent) {
+            _menuevent.menu.clear();
+            var item = _menuevent.menu.add({
+                title : 'Maptype',
+                showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
+            });
 
-window.open();
+            item.addEventListener("click", function(_e) {
+            var dialogView = Ti.UI.createOptionDialog({
+                selectedIndex : 1,
+                options : MAPTYPES.map(function(m) {return m.name;})
+            });
+            dialogView.show();
+            dialogView.addEventListener('click', function(_e) {
+                var mapType = dialogView.options[_e.index];
+                $.children[0].setMapType(MAPTYPES[_e.index].index);
+            });
 
-var osmDroid = require('ti.osmdroid');
+        });
+    };
+    activity.invalidateOptionsMenu();
+    }
+});
+$.open();
 
 if (Ti.Platform.name == "android") {
-    require('ti.permissions').requestPermissions(['android.permission.WRITE_EXTERNAL_STORAGE', 'android.permission.ACCESS_COARSE_LOCATION'], function(_e) {
-    window.add(osmDroid.createView({
-        mapType : osmDroid.CYCLEMAP,
-        /*
-            Possible values:
-            BASE_OVERLAY_NL,
-            CYCLEMAP,
-            CLOUDMADESMALLTILES,
-            CLOUDMADESTANDARDTILES,
-            CYCLEMAP,
-            DEFAULT_TILE_SOURCE,
-            FIETS_OVERLAY_NL,
-            MAPNIK,
-            MAPQUESTAERIAL,
-            MAPQUESTAERIAL_US,
-            MAPQUESTOSM,
-            PUBLIC_TRANSPORT,
-            ROADS_OVERLAY_NL
+var permissions = ['android.permission.ACCESS_COARSE_LOCATION', 'android.permission.WRITE_EXTERNAL_STORAGE'];
+TiPermissions.requestPermissions(permissions, function(_e) {
+if (_e.success) {
+
+}
+});
+$.add(osmDroid.createView({
+mapType : osmDroid.CYCLEMAP,
+/*
+Possible values:
+CYCLEMAP,
+MAPNIK,
+MAPQUESTAERIAL,
+MAPQUESTAERIAL_US,
+MAPQUESTOSM,
+PUBLIC_TRANSPORT,
 */
-        region : {
-            latitude : 53.53,
-            longitude : 10.0,
-            latitudeDelta : 0.01,
-            longitudeDelta : 0.01
-        },
-        animate : true,
-        regionFit : true,
-        userLocation : true,
-        zoomEnabled : false,
-        scrollEnabled : false
+region : {
+latitude : 53.53,
+longitude : 10.0,
+latitudeDelta : 0.01,
+longitudeDelta : 0.01
+},
+animate : true,
+regionFit : true,
+userLocation : true,
+zoomEnabled : false,
+scrollEnabled : false
 
 }));
-
-window.children[0].zoom(13);
-
-});
-
+$.children[0].zoom(13);
 }
 ~~~

@@ -19,8 +19,6 @@ import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
 
-import org.osmdroid.views.overlay.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,9 +128,8 @@ public class ViewProxy extends TiViewProxy {
 		if (annotations != null) {
 			
 			this.annotations = annotations;
-			/*
 			List<Overlay> overlays = view.getOverlays();
-			synchronized (overlays) {
+			/*synchronized (overlays) {
 				if (overlays.contains(overlay)) {
 					overlays.remove(overlay);
 					overlay = null;
