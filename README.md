@@ -3,22 +3,13 @@ OSMdroid
 
 ![](https://raw.githubusercontent.com/AppWerft/Ti.OSMdroid/master/assets/osmdroid.png)
 ~~~
+
 const MAPTYPES = [{
-    name : 'CycleMap',
-    index : 3
-}, {
-name : 'MAPNIK',
-index : 6
-}, {
-name : 'MAPQUEST-AERIAL',
-index : 7
-}, {
-name : 'MAPQUEST-OSM',
-index : 9
-}, {
-name : 'PUBLIC_TRANSPORT',
-index : 10
-}];
+    name : 'CycleMap',index : 3
+    }, {name : 'MAPNIK',index : 6
+    }, {name : 'MAPQUEST-AERIAL',index : 7
+    }, {name : 'MAPQUEST-OSM',index : 9
+    }, {name : 'PUBLIC_TRANSPORT',index : 10}];
 
 var TiPermissions = require('ti.permissions'),
 osmDroid = require('ti.osmdroid');
@@ -56,14 +47,11 @@ $.addEventListener('open', function(_event) {
 $.open();
 
 if (Ti.Platform.name == "android") {
-var permissions = ['android.permission.ACCESS_COARSE_LOCATION', 'android.permission.WRITE_EXTERNAL_STORAGE'];
-TiPermissions.requestPermissions(permissions, function(_e) {
-if (_e.success) {
-
-}
-});
-$.add(osmDroid.createView({
-mapType : osmDroid.CYCLEMAP,
+    var permissions = ['android.permission.ACCESS_COARSE_LOCATION', 'android.permission.WRITE_EXTERNAL_STORAGE'];
+    TiPermissions.requestPermissions(permissions, function(_e) {
+    });
+    $.add(osmDroid.createView({
+    mapType : osmDroid.CYCLEMAP,
 /*
 Possible values:
 CYCLEMAP,
@@ -73,19 +61,18 @@ MAPQUESTAERIAL_US,
 MAPQUESTOSM,
 PUBLIC_TRANSPORT,
 */
-region : {
-latitude : 53.53,
-longitude : 10.0,
-latitudeDelta : 0.01,
-longitudeDelta : 0.01
-},
-animate : true,
-regionFit : true,
-userLocation : true,
-zoomEnabled : false,
-scrollEnabled : false
-
-}));
-$.children[0].zoom(13);
+        region : {
+            latitude : 53.53,
+            longitude : 10.0,
+            latitudeDelta : 0.01,
+            longitudeDelta : 0.01
+        },
+        animate : true,
+        regionFit : true,
+        userLocation : true,
+        zoomEnabled : false,
+        scrollEnabled : false
+    }));
+    $.children[0].zoom(13);
 }
 ~~~
